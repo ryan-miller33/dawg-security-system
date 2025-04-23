@@ -9,7 +9,7 @@
 
 Project Proposal:
 
-[Project Proposal](Docs/project_proposal.docx)
+[Project Proposal](Docs/project_proposal.pdf)
 
 System Level Diagram:
 
