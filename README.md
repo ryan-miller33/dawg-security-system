@@ -19,6 +19,9 @@ Work Breakdown/Schedule:
 
 [Gantt Chart](Docs/CF_RM_GANTT_CHART.xlsx)
 
+Component Breakdown:
+
+[Component Breakdown](Docs/component_breakdown.png)
 
 
 
