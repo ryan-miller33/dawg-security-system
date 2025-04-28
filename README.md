@@ -17,7 +17,7 @@ System Level Diagram:
 
 Work Breakdown/Schedule:
 
-[Gantt Chart](Docs/CF_RM_GANTT_CHART.xlsx)
+[Gantt Chart](Docs/CF_RM_GANTT_CHART_REAL.xlsx)
 
 Component Breakdown:
 
