@@ -1,33 +1,19 @@
-#include "stm32f407xx.h"
-#include "stdio.h"
-#include "proximitysensor.h"
+#include "ultrasonic.h"
+#include "lcd.h"
+#include "led_matrix.h"
+#include "buzzer.h"
 
-extern volatile uint32_t begTime;
 volatile uint32_t begTime = 0;
-
-extern volatile uint32_t pulse;
 volatile uint32_t pulse = 0;
-
-extern volatile double echoPulseSec;
 volatile double echoPulseSec = 0;
-
-extern volatile uint32_t count;
 volatile uint32_t count = 0;
-
-extern volatile double distance;
 volatile double distance = 0;
-
-extern volatile int int_distance;
 volatile int int_distance = 0;
-
-extern volatile int closest_distance;
 volatile int closest_distance = 9999;
-
-extern volatile int threat_level;
-volatile int threat_level = 0;
-
-extern volatile int last_threat_level;
+volatile uint8_t threat_level = 0;
 volatile int last_threat_level = -1;
+
+static bool beep_started = false;
 
 void Ultrasonic_init(void) {
 	
@@ -130,36 +116,49 @@ void TIM3_IRQHandler(void) {
     }
 }
 
-void Proxy_Distance(volatile int int_distance) {
+void Proxy_Distance(volatile int read_distance) {
     static int last_displayed_distance = -1;
 
     // Update closest distance if it's a new minimum
-    if (int_distance < closest_distance) {
-        closest_distance = int_distance;
+    if (read_distance < closest_distance) {
+        closest_distance = read_distance;
     }
 
     // Determine threat level
-    if (closest_distance < 10) { //10cm is too close for someone before it sends a max threat alert
+    if (closest_distance < 30) { //30cm is too close for someone before it sends a max threat alert
         threat_level = 2;
     } else if (closest_distance <= 100) {
         threat_level = 1;
     } else {
         threat_level = 0;
     }
-
-    // Only update screen if threat level has changed
-    if (threat_level != last_threat_level) {
+		
+		
+			if (threat_level != last_threat_level) {
         last_threat_level = threat_level;
-
+				
+			//stop any alarm buzzer noise loops
+				TIM2->CR1 &= ~TIM_CR1_CEN;
+				buzzer_state = 0;
+				TIM4->CCR1 = 0;
+				
         LCD_clearDisplay();
         LCD_placeCursor(1);
 
         if (threat_level == 2) {
 						delay();
-            LCD_printString("DANGER ALERT");
+            LCD_printString(" SECURITY ALERT ");
             LCD_placeCursor(2);
 						delay();
-            LCD_printString("High Threat!");
+            LCD_printString("  High Threat!  ");
+						TIM5_Init(10);
+						LED_On(8);
+						LED_On(9);
+					
+					//loud periodic buzz
+						buzz_high = 1000;
+						buzz_low = 1000;
+					
         }
         else if (threat_level == 1) {
 						delay();
@@ -167,12 +166,28 @@ void Proxy_Distance(volatile int int_distance) {
 
             // Force update of distance on line 2
             last_displayed_distance = -1;
+					
+					buzz_high = 200;
+					buzz_low = 2800;
+					buzz_power = buzz_high / 100;
+						
         }
         else {
 						delay();
             LCD_printString("Motion Detected");
+						TIM5_Init(8);
+					
+					Buzzer_Init();
+					Beep_Timer_Init();
         }
+				
+				//start beep active loop
+				TIM2->ARR = buzz_low;
+				TIM2->CNT = 0;
+				TIM2->CR1 |= TIM_CR1_CEN;
     }
+				
+		
 
     // Only update line 2 during LOW THREAT state (level 1)
     if (threat_level == 1 && closest_distance != last_displayed_distance) {
@@ -182,8 +197,8 @@ void Proxy_Distance(volatile int int_distance) {
         LCD_printString(" Closest: ");
         LCD_printInt(closest_distance);
         LCD_printString(" cm ");
+				TIM5_Init(9);
+				LED_On(8);
     }
+		
 }
-
-
-

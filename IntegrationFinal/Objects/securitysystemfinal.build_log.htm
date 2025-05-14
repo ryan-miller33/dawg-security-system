@@ -1,0 +1,145 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: µVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Ryan Miller, University of St Thomas, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.38.0.0
+Toolchain Path:  C:\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+K:\code\IntegrationFinal\securitysystemfinal.uvprojx
+Project File Date:  05/11/2025
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'Target 1'
+main.c(16): warning: no previous extern declaration for non-static variable 'system_state' [-Wmissing-variable-declarations]
+SystemState system_state = STATE_SLEEP;
+            ^
+main.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+SystemState system_state = STATE_SLEEP;
+^
+main.c(78): warning: for loop has empty body [-Wempty-body]
+                                                                                for(int j = 0; j < 100000; j++);
+                                                                                                               ^
+main.c(78): note: put the semicolon on a separate line to silence this warning
+2 warnings generated.
+compiling main.c...
+compiling lcd.c...
+motion.c(9): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+    GPIOA->MODER &= ~(0x03 << 0);  // Set PA0 to input mode (00)
+                 ~~ ^~~~~~~~~~~~
+motion.c(13): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+    GPIOD->OTYPER &= ~(1 << 15);    // Push-pull mode
+                  ~~ ^~~~~~~~~~
+motion.c(14): warning: signed shift result (0xC0000000) sets the sign bit of the shift expression's type ('int') and becomes negative [-Wshift-sign-overflow]
+    GPIOD->OSPEEDR |= (0x03 << 30); // High speed
+                       ~~~~ ^  ~~
+motion.c(14): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+    GPIOD->OSPEEDR |= (0x03 << 30); // High speed
+                   ~~  ~~~~~^~~~~
+motion.c(15): warning: signed shift result (0xC0000000) sets the sign bit of the shift expression's type ('int') and becomes negative [-Wshift-sign-overflow]
+    GPIOD->PUPDR &= ~(0x03 << 30);  // No pull-up/down
+                      ~~~~ ^  ~~
+motion.c(36): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+            GPIOD->ODR &= ~(1 << 14); // Turn off PD14
+                       ~~ ^~~~~~~~~~
+6 warnings generated.
+compiling motion.c...
+buzzer.c(50): warning: implicit conversion changes signedness: 'volatile int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+                                                TIM2->ARR = buzz_low;
+                                                          ~ ^~~~~~~~
+buzzer.c(54): warning: implicit conversion changes signedness: 'volatile int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+                                                TIM4->CCR1 = buzz_power;
+                                                           ~ ^~~~~~~~~~
+buzzer.c(60): warning: implicit conversion changes signedness: 'volatile int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+                                                TIM2->ARR = buzz_high;
+                                                          ~ ^~~~~~~~~
+buzzer.c(66): warning: no newline at end of file [-Wnewline-eof]
+ 
+ ^
+4 warnings generated.
+compiling buzzer.c...
+compiling led_matrix.c...
+accelerometer.c(56): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+    return SPI1->DR;
+    ~~~~~~ ~~~~~~^~
+accelerometer.c(70): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+        uint8_t tag = SPI_Send(0x00); //Read back
+                ^
+accelerometer.c(99): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
+    uint8_t data = SPI_Send(0x00);
+            ^
+accelerometer.c(135): warning: implicit conversion changes signedness: 'volatile int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+    TIM2->ARR = buzz_low;
+              ~ ^~~~~~~~
+4 warnings generated.
+compiling accelerometer.c...
+compiling system_stm32f4xx.c...
+light_sensor.c(27): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+    ADC1->SQR3 &= ~(0x1F);          // Clear old channel
+               ~~ ^~~~~~~
+light_sensor.c(39): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+    return ADC1->DR;
+    ~~~~~~ ~~~~~~^~
+2 warnings generated.
+compiling light_sensor.c...
+ultrasonic.c(185): warning: implicit conversion changes signedness: 'volatile int' to 'uint32_t' (aka 'unsigned int') [-Wsign-conversion]
+                                TIM2->ARR = buzz_low;
+                                          ~ ^~~~~~~~
+ultrasonic.c(16): warning: unused variable 'beep_started' [-Wunused-variable]
+static bool beep_started = false;
+            ^
+2 warnings generated.
+compiling ultrasonic.c...
+linking...
+Program Size: Code=14148 RO-data=1164 RW-data=12 ZI-data=1712  
+".\Objects\securitysystemfinal.axf" - 0 Error(s), 20 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.2.17.1.pack
+                Keil.STM32F4xx_DFP.2.17.1
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+   * Component: Startup Version: 2.6.3
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_Target_1
+  C:/Users/rymil/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  C:/Users/rymil/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+
+   * Component: Keil::Device:Startup:2.6.3
+      Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
+      Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f407xx.s
+      Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
+      Source file:   MDK/Device/Source/ARM/STM32F40xxx_41xxx_OPT.s
+      Source file:   MDK/Device/Source/ARM/STM32F4xx_OTP.s
+Build Time Elapsed:  00:00:03
+</pre>
+</body>
+</html>

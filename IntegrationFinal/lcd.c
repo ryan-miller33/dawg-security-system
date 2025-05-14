@@ -1,7 +1,6 @@
-//Ryan Miller
 // lcd.c
-
 #include "lcd.h"
+
 
 void LCD_port_init(void){
 //STEP 1: Enable GPIOD in RCC AHB1ENR register
@@ -436,16 +435,12 @@ void check_BF(void){
 
 }
 
-
-
 void LCD_printInt(int number) {
 	char intb[16];
 	sprintf(intb, "%d", number);
 	for (int j = 0; j <= 2000; j++);
 	LCD_printString(intb);
 }
-
-
 
 void delay(void) {
 	

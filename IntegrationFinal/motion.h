@@ -1,4 +1,3 @@
-//motion.h
 #ifndef MOTION_H
 #define MOTION_H
 
@@ -6,15 +5,6 @@
 
 void GPIO_init(void);             // Function to initialize GPIO
 uint8_t motion_detected(void);    // Function to check if motion is detected
-void motion_detec(void);
-
-
-
+void motion_sensor_handler(void);
 
 #endif // MOTION_H
-
-
-
-
-
-

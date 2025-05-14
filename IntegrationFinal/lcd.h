@@ -1,18 +1,11 @@
-// lcd.h
-
-/*******************************
- * LCD pins connections to PORTD
- *******************************
- */
-
 #ifndef LCD_H
 #define LCD_H
-#include "stm32f4xx.h"
-#include <stdint.h>
+
 #include "stdio.h"
+#include "stm32f407xx.h"
 
-
-
+#define TRIG_PWM 4
+#define ECHO_PULSE 5
 #define RS 7 
 #define RW 6 
 #define EN 5 
@@ -20,8 +13,6 @@
 #define DB6 2 
 #define DB5 1 
 #define DB4 0 
-
-
 
 // Function prototypes
 void LCD_port_init(void); //complete
@@ -43,10 +34,5 @@ void clear_PIN(int PINNO); //complete
 void set_PIN(int PINNO); //complete
 void check_BF(void); //complete
 void delay(void); //complete
-
-
-
-// Feel free to add any other helpful functions
-
 
 #endif
