@@ -1,27 +1,14 @@
 # dawg-security-system
  Calvin Friedrich | Ryan Miller Security System Project
 
-## Project Summary
 
-## Parts List + Description
+This Repository doesn't contain documentation and is primarily used to host source code files. For full documentation of the Security System, please refrence the docs folder to find all relevant documents about this project.
 
-## Documents
 
-Project Proposal:
+The code file contains induvidual .c and .h files. For the fully integrated, final product code, refrence the IntegrationFinal folder.
 
-[Project Proposal](Docs/project_proposal.pdf)
 
-System Level Diagram:
 
-[System Diagram](Docs/system_diagram.jpg)
-
-Work Breakdown/Schedule:
-
-[Gantt Chart](Docs/CF_RM_GANTT_CHART_REAL.xlsx)
-
-Component Breakdown:
-
-[Component Breakdown](Docs/component_breakdown.png)
 
 
 
